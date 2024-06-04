@@ -6,7 +6,7 @@ typedef struct Nodo {
     int campo;
     struct Nodo* siguiente;
 } Nodo;
-
+// Comentario 2
 // Función para crear un nuevo nodo
 Nodo* crearNodo(int valor) {
     Nodo* nuevoNodo = (Nodo*)malloc(sizeof(Nodo));
