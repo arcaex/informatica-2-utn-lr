@@ -3,8 +3,9 @@
 
 // Definición de un nodo de la cola
 typedef struct Nodo {
-    char descripcion[50];
+    char* descripcion;
     int cantidad;
+    int codigo;
     float precio;
     struct Nodo* siguiente;
 } Nodo;
@@ -16,11 +17,12 @@ typedef struct Cola {
 } Cola;
 
 // Función para crear un nuevo nodo
-Nodo* crearNodo(char descripcion[50], int cantidad, float precio) {
+Nodo* crearNodo(char* descripcion, int cantidad, float precio, int codigo) {
     Nodo* nuevoNodo = (Nodo*)malloc(sizeof(Nodo));
     nuevoNodo->descripcion = descripcion;
     nuevoNodo->cantidad = cantidad;
     nuevoNodo->precio = precio;
+    nuevoNodo->codigo = codigo;
     nuevoNodo->siguiente = NULL;
     return nuevoNodo;
 }
@@ -32,9 +34,21 @@ Cola* crearCola() {
     return cola;
 }
 
+// Cantidad de Nodos
+int cantidadElementos(Cola* cola) {
+    int c = 0;
+    Nodo* temp = cola->frente;
+    while (temp != NULL) {
+        c++;
+        temp = temp->siguiente;
+    }
+    return c;
+}
+
 // Función para encolar (agregar) un elemento a la cola
-void encolar(Cola* cola, char descripcion[50], int cantidad, float precio) {
-    Nodo* nuevoNodo = crearNodo(descripcion,cantidad,precio);
+void encolar(Cola* cola, char* descripcion, int cantidad, float precio) {
+    int codigo = cantidadElementos(cola) + 1;
+    Nodo* nuevoNodo = crearNodo(descripcion,cantidad,precio,codigo);
     if (cola->trasero == NULL) {
         cola->frente = nuevoNodo;
         cola->trasero = nuevoNodo;
@@ -45,7 +59,7 @@ void encolar(Cola* cola, char descripcion[50], int cantidad, float precio) {
 }
 
 // Función para desencolar (eliminar) un elemento de la cola
-void desencolar(Cola* cola) {
+int desencolar(Cola* cola) {
     if (cola->frente == NULL) {
         printf("Cola vacía\n");
         return -1;
@@ -56,7 +70,7 @@ void desencolar(Cola* cola) {
         cola->trasero = NULL;
     }
     free(temp);
-    return;
+    return 1;
 }
 
 // Función para imprimir la cola
@@ -65,11 +79,14 @@ void imprimirCola(Cola* cola) {
     while (temp != NULL) {
         printf("%s -> ", temp->descripcion);
         printf("%d -> ", temp->cantidad);
+        printf("%d -> ", temp->codigo);
         printf("%f.2 -> ", temp->precio);
         temp = temp->siguiente;
     }
     printf("NULL\n");
 }
+
+
 
 // Función para liberar la memoria de la cola
 void liberarCola(Cola* cola) {
@@ -85,9 +102,12 @@ void liberarCola(Cola* cola) {
 int main() {
     Cola* cola = crearCola();
 
-    encolar(cola, "Mayonesa",5,500);
-    encolar(cola, "Pancho",3,5000);
-    encolar(cola, "Carne",300,2500);
+    printf("Ingrese Nombre del Producto")
+
+    descripcion
+    cantidad
+    precio
+    encolar(cola, descripcion,cantidad,precio);
 
     printf("Cola: ");
     imprimirCola(cola);
@@ -96,6 +116,7 @@ int main() {
     printf("Cola después de desencolar: ");
     imprimirCola(cola);
 
+    printf("La cantidad de nodos es %d",cantidadElementos(cola));
     liberarCola(cola);
     return 0;
 }
