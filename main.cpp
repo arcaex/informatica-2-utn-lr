@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Definición de un nodo de la cola
 typedef struct Nodo {
@@ -102,11 +103,19 @@ void liberarCola(Cola* cola) {
 int main() {
     Cola* cola = crearCola();
 
-    printf("Ingrese Nombre del Producto")
+    char* descripcion;
+    int cantidad;
+    float precio;
 
-    descripcion
-    cantidad
-    precio
+    printf("Ingrese Nombre del Producto");
+    scanf("%s",descripcion);
+
+    printf("Ingresar Cantidad");
+    scanf("%d",&cantidad);
+
+    printf("Ingresar Precio");
+    scanf("%f",&precio);
+
     encolar(cola, descripcion,cantidad,precio);
 
     printf("Cola: ");
